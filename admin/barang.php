@@ -72,7 +72,7 @@ function konfirmasiHapus(id) {
 </script>
 
 <style>
-    /* Efek hover agar card sedikit terangkat saat disentuh kursor */
+
     .panel-default:hover {
         transform: translateY(-5px);
         box-shadow: 0 8px 16px rgba(0,0,0,0.2) !important;
