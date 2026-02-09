@@ -49,10 +49,6 @@ if($_SESSION['status'] != "Login"){
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             <i class="glyphicon glyphicon-wrench"></i> Pengaturan <span class="caret"></span>
           </a>
-          <ul class="dropdown-menu">
-            <li><a href="harga.php"><i class="glyphicon glyphicon-usd"></i> Pengaturan Harga</a></li>
-            <li><a href="ganti_password.php"><i class="glyphicon glyphicon-lock"></i> Ganti Password</a></li>
-          </ul>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
