@@ -4,7 +4,7 @@
     <div class="panel">
         <div class="panel-heading"><h4>Tambah Barang Baru</h4></div>
         <div class="panel-body">
-            <form method="post" action="tambah_barang_aksi.php" enctype="multipart/form-data">
+            <form method="post" action="aksi_barang.php" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Nama Barang</label>
                     <input type="text" class="form-control" name="nama" required>

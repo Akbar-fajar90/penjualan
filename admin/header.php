@@ -46,10 +46,6 @@ if($_SESSION['status'] != "Login"){
             <a href="laporan.php"><i class="glyphicon glyphicon-list-alt"></i> Laporan</a>
           </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            <i class="glyphicon glyphicon-wrench"></i> Pengaturan <span class="caret"></span>
-          </a>
-        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><p style="color:white;">Selamat Datang, <b><?php echo $_SESSION['ussername']; ?></b></p></li>

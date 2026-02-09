@@ -8,7 +8,7 @@ $stok = $_POST['stok'];
 
 
 $rand = rand();
-$allowed = array('gif','png','jpg','jpeg');
+$allowed = array('gif','png','jpg','jpeg', 'jfif');
 $filename = $_FILES['foto']['name'];
 
 if($filename == ""){
