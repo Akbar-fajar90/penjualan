@@ -1,13 +1,22 @@
 <?php
 include("../koneksi.php");
 include("header.php");
+
+
+$tanggal_awal = isset($_GET['tanggal_awal']) ? $_GET['tanggal_awal'] : '';
+$tanggal_akhir = isset($_GET['tanggal_akhir']) ? $_GET['tanggal_akhir'] : '';
 ?>
 
 <body>
 
     <center>
         <h2>LAPORAN PENJUALAN</h2>
-        <p>Dicetak oleh: <?php echo $_SESSION['ussername']; ?> pada <?php echo date('d-m-Y H:i:s'); ?></p>
+        
+        <?php if (!empty($tanggal_awal) && !empty($tanggal_akhir)): ?>
+            <h4>Periode: <?php echo date('d-m-Y', strtotime($tanggal_awal)); ?> s/d <?php echo date('d-m-Y', strtotime($tanggal_akhir)); ?></h4>
+        <?php endif; ?>
+        
+        <p>Dicetak oleh: <?php echo $_SESSION['username']; ?> pada <?php echo date('d-m-Y H:i:s'); ?></p>
     </center>
 
     <br/>
@@ -27,14 +36,21 @@ include("header.php");
             <?php 
             $id_user = $_SESSION["user_id"];
             
-            $data = mysqli_query($koneksi, "
+            $query = "
                 SELECT penjualan.*, barang.nama_barang, user.user_nama 
                 FROM penjualan 
                 JOIN barang ON penjualan.id_barang = barang.id_barang 
                 JOIN user ON penjualan.user_id = user.user_id
                 WHERE penjualan.user_id = '$id_user' 
-                ORDER BY penjualan.id_jual DESC
-            ") or die(mysqli_error($koneksi));
+            ";
+            
+            if (!empty($tanggal_awal) && !empty($tanggal_akhir)) {
+                $query .= " AND DATE(penjualan.tgl_jual) BETWEEN '$tanggal_awal' AND '$tanggal_akhir' ";
+            }
+            
+            $query .= " ORDER BY penjualan.id_jual DESC";
+            
+            $data = mysqli_query($koneksi, $query) or die(mysqli_error($koneksi));
             
             $no = 1;
             $grand_total = 0;
@@ -53,7 +69,11 @@ include("header.php");
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="5" class="text-right">TOTAL PENDAPATAN SAYA</th>
+                <th colspan="5" class="text-right">TOTAL PENDAPATAN 
+                    <?php if (!empty($tanggal_awal) && !empty($tanggal_akhir)): ?>
+                        (<?php echo date('d-m-Y', strtotime($tanggal_awal)); ?> - <?php echo date('d-m-Y', strtotime($tanggal_akhir)); ?>)
+                    <?php endif; ?>
+                </th>
                 <th class="text-right">Rp <?php echo number_format($grand_total); ?></th>
             </tr>
         </tfoot>
@@ -66,7 +86,7 @@ include("header.php");
         <div class="col-xs-4 text-center">
             <p>Tertanda,</p>
             <br/><br/><br/>
-            <p><b><?php echo $_SESSION['ussername']; ?></b></p>
+            <p><b><?php echo $_SESSION['username']; ?></b></p>
         </div>
     </div>
 
